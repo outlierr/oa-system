@@ -1,7 +1,7 @@
 package com.example.oa.service.auth.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.oa.entity.system.SysLoginLog;
+import com.example.oa.entity.auth.SysLoginLog;
 import com.example.oa.service.auth.SysLoginLogService;
 import com.example.oa.mapper.SysLoginLogMapper;
 import org.springframework.stereotype.Service;

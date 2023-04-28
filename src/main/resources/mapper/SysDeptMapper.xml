@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.oa.mapper.SysDeptMapper">
 
-    <resultMap id="BaseResultMap" type="com.example.oa.entity.system.SysDept">
+    <resultMap id="BaseResultMap" type="com.example.oa.entity.auth.SysDept">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="parentId" column="parent_id" jdbcType="BIGINT"/>

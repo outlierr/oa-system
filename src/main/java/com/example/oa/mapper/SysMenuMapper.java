@@ -1,6 +1,6 @@
 package com.example.oa.mapper;
 
-import com.example.oa.entity.system.SysMenu;
+import com.example.oa.entity.auth.SysMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -12,7 +12,9 @@ import java.util.List;
 * @Entity com.example.oa.entity.system.SysMenu
 */
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
-    List<SysMenu> findPermsByUserId(Long userId);
+    List<SysMenu> findMenuPermsByUserId(Long userId);
+    List<SysMenu> findMenuByUserId(Long userId);
+
 }
 
 

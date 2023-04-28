@@ -1,4 +1,4 @@
-package com.example.oa.entity.system;
+package com.example.oa.entity.auth;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,47 +9,41 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 系统访问记录
- * @TableName sys_login_log
+ * 岗位信息表
+ * @TableName sys_post
  */
-@TableName(value ="sys_login_log")
+@TableName(value ="sys_post")
 @Data
-public class SysLoginLog implements Serializable {
+public class SysPost implements Serializable {
     /**
-     * 访问ID
+     * 岗位ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 用户账号
+     * 岗位编码
      */
-    @TableField(value = "username")
-    private String username;
+    @TableField(value = "post_code")
+    private String postCode;
 
     /**
-     * 登录IP地址
+     * 岗位名称
      */
-    @TableField(value = "ipaddr")
-    private String ipaddr;
+    @TableField(value = "name")
+    private String name;
 
     /**
-     * 登录状态（0成功 1失败）
+     * 描述
+     */
+    @TableField(value = "description")
+    private String description;
+
+    /**
+     * 状态（1正常 0停用）
      */
     @TableField(value = "status")
     private Integer status;
-
-    /**
-     * 提示信息
-     */
-    @TableField(value = "msg")
-    private String msg;
-
-    /**
-     * 访问时间
-     */
-    @TableField(value = "access_time")
-    private LocalDateTime accessTime;
 
     /**
      * 
@@ -83,13 +77,12 @@ public class SysLoginLog implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        SysLoginLog other = (SysLoginLog) that;
+        SysPost other = (SysPost) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getIpaddr() == null ? other.getIpaddr() == null : this.getIpaddr().equals(other.getIpaddr()))
+            && (this.getPostCode() == null ? other.getPostCode() == null : this.getPostCode().equals(other.getPostCode()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getMsg() == null ? other.getMsg() == null : this.getMsg().equals(other.getMsg()))
-            && (this.getAccessTime() == null ? other.getAccessTime() == null : this.getAccessTime().equals(other.getAccessTime()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -100,11 +93,10 @@ public class SysLoginLog implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getIpaddr() == null) ? 0 : getIpaddr().hashCode());
+        result = prime * result + ((getPostCode() == null) ? 0 : getPostCode().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
-        result = prime * result + ((getMsg() == null) ? 0 : getMsg().hashCode());
-        result = prime * result + ((getAccessTime() == null) ? 0 : getAccessTime().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -118,11 +110,10 @@ public class SysLoginLog implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", ipaddr=").append(ipaddr);
+        sb.append(", postCode=").append(postCode);
+        sb.append(", name=").append(name);
+        sb.append(", description=").append(description);
         sb.append(", status=").append(status);
-        sb.append(", msg=").append(msg);
-        sb.append(", accessTime=").append(accessTime);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

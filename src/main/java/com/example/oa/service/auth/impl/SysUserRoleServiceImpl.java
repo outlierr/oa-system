@@ -1,7 +1,7 @@
 package com.example.oa.service.auth.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.oa.entity.system.SysUserRole;
+import com.example.oa.entity.auth.SysUserRole;
 import com.example.oa.service.auth.SysUserRoleService;
 import com.example.oa.mapper.SysUserRoleMapper;
 import org.springframework.stereotype.Service;

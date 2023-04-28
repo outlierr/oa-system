@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 public final class ExtendsCodecModule extends SimpleModule {
 
@@ -49,11 +50,11 @@ public final class ExtendsCodecModule extends SimpleModule {
 
     @Override
     public void setupModule(SetupContext context) {
-
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         addSerializer(LocalDateTime.class, (value, gen) ->
-                gen.writeNumber(value.toInstant(ZoneOffset.UTC).toEpochMilli()));
+                gen.writeNumber(pattern.format(value)));
         addDeserializer(LocalDateTime.class, parser ->
-                Instant.ofEpochMilli(parser.getLongValue()).atOffset(ZoneOffset.UTC).toLocalDateTime());
+                LocalDateTime.parse(parser.getValueAsString(), pattern));
 
         super.setupModule(context);
     }

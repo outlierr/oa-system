@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.oa.mapper.SysMenuMapper">
 
-    <resultMap id="BaseResultMap" type="com.example.oa.entity.system.SysMenu">
+    <resultMap id="BaseResultMap" type="com.example.oa.entity.auth.SysMenu">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="parentId" column="parent_id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
@@ -31,15 +31,27 @@
     <sql id="columns">
         m.id,m.parent_id,m.name,m.type,m.path,m.component,m.perms,m.icon,m.sort_value,m.status,m.create_time,m.update_time,m.is_deleted
     </sql>
-    <select id="findPermsByUserId" resultType="com.example.oa.entity.system.SysMenu">
+    <select id="findMenuPermsByUserId" resultType="com.example.oa.entity.auth.SysMenu">
+        select
+        <include refid="columns"/>
+        from sys_menu m
+        left join sys_user_role ur on ur.id = m.id
+        left join sys_role_menu rm on rm.role_id = ur.role_id
+        where ur.user_id = #{userId} and m.type == 2
+        and m.status = 1
+        and m.is_deleted = 0
+        and ur.is_deleted = 0
+        and rm.is_deleted = 0
+    </select>
+    <select id="findMenuByUserId" resultType="com.example.oa.entity.auth.SysMenu">
         select <include refid="columns"/>
         from sys_menu m
-                 left join sys_user_role ur on ur.id = m.id
-                 left join sys_role_menu rm on rm.role_id = ur.role_id
-        where ur.user_id = #{userId}
-          and m.status = 1
-          and m.is_deleted = 0
-          and ur.is_deleted = 0
-          and rm.is_deleted = 0
+        left join sys_user_role ur on ur.id = m.id
+        left join sys_role_menu rm on rm.role_id = ur.role_id
+        where ur.user_id = #{userId} and m.type != 2
+        and m.status = 1
+        and m.is_deleted = 0
+        and ur.is_deleted = 0
+        and rm.is_deleted = 0
     </select>
 </mapper>

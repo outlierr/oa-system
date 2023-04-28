@@ -1,6 +1,6 @@
 package com.example.oa.service.auth;
 
-import com.example.oa.entity.system.SysOperLog;
+import com.example.oa.entity.auth.SysOperLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -1,6 +1,6 @@
 package com.example.oa.mapper;
 
-import com.example.oa.entity.system.SysDept;
+import com.example.oa.entity.auth.SysDept;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

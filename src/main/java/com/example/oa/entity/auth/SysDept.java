@@ -1,4 +1,4 @@
-package com.example.oa.entity.system;
+package com.example.oa.entity.auth;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,59 +9,35 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 菜单表
- * @TableName sys_menu
+ * 组织机构
+ * @TableName sys_dept
  */
-@TableName(value ="sys_menu")
+@TableName(value ="sys_dept")
 @Data
-public class SysMenu implements Serializable {
+public class SysDept implements Serializable {
     /**
-     * 编号
+     * 
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 所属上级
-     */
-    @TableField(value = "parent_id")
-    private Long parentId;
-
-    /**
-     * 名称
+     * 部门名称
      */
     @TableField(value = "name")
     private String name;
 
     /**
-     * 类型(0:目录,1:菜单,2:按钮)
+     * 上级部门id
      */
-    @TableField(value = "type")
-    private Integer type;
+    @TableField(value = "parent_id")
+    private Long parentId;
 
     /**
-     * 路由地址
+     * 树结构
      */
-    @TableField(value = "path")
-    private String path;
-
-    /**
-     * 组件路径
-     */
-    @TableField(value = "component")
-    private String component;
-
-    /**
-     * 权限标识
-     */
-    @TableField(value = "perms")
-    private String perms;
-
-    /**
-     * 图标
-     */
-    @TableField(value = "icon")
-    private String icon;
+    @TableField(value = "tree_path")
+    private String treePath;
 
     /**
      * 排序
@@ -70,19 +46,31 @@ public class SysMenu implements Serializable {
     private Integer sortValue;
 
     /**
-     * 状态(0:禁止,1:正常)
+     * 负责人
+     */
+    @TableField(value = "leader")
+    private String leader;
+
+    /**
+     * 电话
+     */
+    @TableField(value = "phone")
+    private String phone;
+
+    /**
+     * 状态（1正常 0停用）
      */
     @TableField(value = "status")
     private Integer status;
 
     /**
-     * 创建时间
+     * 
      */
     @TableField(value = "create_time")
     private LocalDateTime createTime;
 
     /**
-     * 更新时间
+     * 
      */
     @TableField(value = "update_time")
     private LocalDateTime updateTime;
@@ -107,16 +95,14 @@ public class SysMenu implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        SysMenu other = (SysMenu) that;
+        SysDept other = (SysDept) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getPath() == null ? other.getPath() == null : this.getPath().equals(other.getPath()))
-            && (this.getComponent() == null ? other.getComponent() == null : this.getComponent().equals(other.getComponent()))
-            && (this.getPerms() == null ? other.getPerms() == null : this.getPerms().equals(other.getPerms()))
-            && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
+            && (this.getTreePath() == null ? other.getTreePath() == null : this.getTreePath().equals(other.getTreePath()))
             && (this.getSortValue() == null ? other.getSortValue() == null : this.getSortValue().equals(other.getSortValue()))
+            && (this.getLeader() == null ? other.getLeader() == null : this.getLeader().equals(other.getLeader()))
+            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
@@ -128,14 +114,12 @@ public class SysMenu implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
-        result = prime * result + ((getPath() == null) ? 0 : getPath().hashCode());
-        result = prime * result + ((getComponent() == null) ? 0 : getComponent().hashCode());
-        result = prime * result + ((getPerms() == null) ? 0 : getPerms().hashCode());
-        result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
+        result = prime * result + ((getTreePath() == null) ? 0 : getTreePath().hashCode());
         result = prime * result + ((getSortValue() == null) ? 0 : getSortValue().hashCode());
+        result = prime * result + ((getLeader() == null) ? 0 : getLeader().hashCode());
+        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
@@ -150,14 +134,12 @@ public class SysMenu implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", parentId=").append(parentId);
         sb.append(", name=").append(name);
-        sb.append(", type=").append(type);
-        sb.append(", path=").append(path);
-        sb.append(", component=").append(component);
-        sb.append(", perms=").append(perms);
-        sb.append(", icon=").append(icon);
+        sb.append(", parentId=").append(parentId);
+        sb.append(", treePath=").append(treePath);
         sb.append(", sortValue=").append(sortValue);
+        sb.append(", leader=").append(leader);
+        sb.append(", phone=").append(phone);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

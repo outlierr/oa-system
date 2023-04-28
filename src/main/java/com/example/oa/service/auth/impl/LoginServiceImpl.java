@@ -1,10 +1,6 @@
 package com.example.oa.service.auth.impl;
 
-import com.example.oa.common.enums.UserStatus;
-import com.example.oa.common.result.ResultCodeEnum;
 import com.example.oa.common.utils.JwtUtil;
-import com.example.oa.common.utils.SecurityContextUtil;
-import com.example.oa.entity.system.SysUser;
 import com.example.oa.exception.ServiceException;
 import com.example.oa.security.custom.LoginUser;
 import com.example.oa.service.auth.LoginService;
@@ -13,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 public class LoginServiceImpl implements LoginService {

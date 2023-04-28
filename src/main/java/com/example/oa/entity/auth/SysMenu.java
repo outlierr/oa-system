@@ -1,4 +1,4 @@
-package com.example.oa.entity.system;
+package com.example.oa.entity.auth;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -6,77 +6,73 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import lombok.Data;
 
 /**
- * 用户表
- * @TableName sys_user
+ * 菜单表
+ * @TableName sys_menu
  */
-@TableName(value ="sys_user")
+@TableName(value ="sys_menu")
 @Data
-public class SysUser implements Serializable {
+public class SysMenu implements Serializable {
     /**
-     * 会员id
+     * 编号
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 用户名
+     * 所属上级
      */
-    @TableField(value = "username")
-    private String username;
+    @TableField(value = "parent_id")
+    private Long parentId;
 
     /**
-     * 密码
-     */
-    @TableField(value = "password")
-    private String password;
-
-    /**
-     * 姓名
+     * 名称
      */
     @TableField(value = "name")
     private String name;
 
     /**
-     * 手机
+     * 类型(0:目录,1:菜单,2:按钮)
      */
-    @TableField(value = "phone")
-    private String phone;
+    @TableField(value = "type")
+    private Integer type;
 
     /**
-     * 头像地址
+     * 路由地址
      */
-    @TableField(value = "head_url")
-    private String headUrl;
+    @TableField(value = "path")
+    private String path;
 
     /**
-     * 部门id
+     * 组件路径
      */
-    @TableField(value = "dept_id")
-    private Long deptId;
+    @TableField(value = "component")
+    private String component;
 
     /**
-     * 岗位id
+     * 权限标识
      */
-    @TableField(value = "post_id")
-    private Long postId;
+    @TableField(value = "perms")
+    private String perms;
 
     /**
-     * 微信openId
+     * 图标
      */
-    @TableField(value = "open_id")
-    private String openId;
+    @TableField(value = "icon")
+    private String icon;
 
     /**
-     * 描述
+     * 排序
      */
-    @TableField(value = "description")
-    private String description;
+    @TableField(value = "sort_value")
+    private Integer sortValue;
 
     /**
-     * 状态（1：正常 0：停用）
+     * 状态(0:禁止,1:正常)
      */
     @TableField(value = "status")
     private Integer status;
@@ -98,7 +94,8 @@ public class SysUser implements Serializable {
      */
     @TableField(value = "is_deleted")
     private Integer isDeleted;
-
+    @TableField(exist = false)
+    private List<SysMenu> children;
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
@@ -113,17 +110,16 @@ public class SysUser implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        SysUser other = (SysUser) that;
+        SysMenu other = (SysMenu) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+            && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-            && (this.getHeadUrl() == null ? other.getHeadUrl() == null : this.getHeadUrl().equals(other.getHeadUrl()))
-            && (this.getDeptId() == null ? other.getDeptId() == null : this.getDeptId().equals(other.getDeptId()))
-            && (this.getPostId() == null ? other.getPostId() == null : this.getPostId().equals(other.getPostId()))
-            && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getPath() == null ? other.getPath() == null : this.getPath().equals(other.getPath()))
+            && (this.getComponent() == null ? other.getComponent() == null : this.getComponent().equals(other.getComponent()))
+            && (this.getPerms() == null ? other.getPerms() == null : this.getPerms().equals(other.getPerms()))
+            && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
+            && (this.getSortValue() == null ? other.getSortValue() == null : this.getSortValue().equals(other.getSortValue()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
@@ -135,15 +131,14 @@ public class SysUser implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
+        result = prime * result + ((getParentId() == null) ? 0 : getParentId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
-        result = prime * result + ((getHeadUrl() == null) ? 0 : getHeadUrl().hashCode());
-        result = prime * result + ((getDeptId() == null) ? 0 : getDeptId().hashCode());
-        result = prime * result + ((getPostId() == null) ? 0 : getPostId().hashCode());
-        result = prime * result + ((getOpenId() == null) ? 0 : getOpenId().hashCode());
-        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getPath() == null) ? 0 : getPath().hashCode());
+        result = prime * result + ((getComponent() == null) ? 0 : getComponent().hashCode());
+        result = prime * result + ((getPerms() == null) ? 0 : getPerms().hashCode());
+        result = prime * result + ((getIcon() == null) ? 0 : getIcon().hashCode());
+        result = prime * result + ((getSortValue() == null) ? 0 : getSortValue().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
@@ -158,15 +153,14 @@ public class SysUser implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
+        sb.append(", parentId=").append(parentId);
         sb.append(", name=").append(name);
-        sb.append(", phone=").append(phone);
-        sb.append(", headUrl=").append(headUrl);
-        sb.append(", deptId=").append(deptId);
-        sb.append(", postId=").append(postId);
-        sb.append(", openId=").append(openId);
-        sb.append(", description=").append(description);
+        sb.append(", type=").append(type);
+        sb.append(", path=").append(path);
+        sb.append(", component=").append(component);
+        sb.append(", perms=").append(perms);
+        sb.append(", icon=").append(icon);
+        sb.append(", sortValue=").append(sortValue);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

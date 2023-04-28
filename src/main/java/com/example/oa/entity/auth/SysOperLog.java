@@ -1,4 +1,4 @@
-package com.example.oa.entity.system;
+package com.example.oa.entity.auth;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

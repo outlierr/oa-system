@@ -1,6 +1,6 @@
 package com.example.oa.mapper;
 
-import com.example.oa.entity.system.SysOperLog;
+import com.example.oa.entity.auth.SysOperLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

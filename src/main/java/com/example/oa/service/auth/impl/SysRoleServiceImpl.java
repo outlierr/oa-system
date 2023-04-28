@@ -1,7 +1,7 @@
 package com.example.oa.service.auth.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.oa.entity.system.SysRole;
+import com.example.oa.entity.auth.SysRole;
 import com.example.oa.service.auth.SysRoleService;
 import com.example.oa.mapper.SysRoleMapper;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole>
     implements SysRoleService{
-
+    @Override
+    public void remove(Long id) {
+    }
 }
 
 

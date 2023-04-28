@@ -1,4 +1,4 @@
-package com.example.oa.controller;
+package com.example.oa.controller.auth;
 
 import com.example.oa.common.result.Result;
 import io.swagger.annotations.ApiOperation;

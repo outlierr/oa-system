@@ -1,4 +1,4 @@
-package com.example.oa.entity.system;
+package com.example.oa.entity.auth;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,29 +9,35 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 角色菜单
- * @TableName sys_role_menu
+ * 角色
+ * @TableName sys_role
  */
-@TableName(value ="sys_role_menu")
+@TableName(value ="sys_role")
 @Data
-public class SysRoleMenu implements Serializable {
+public class SysRole implements Serializable {
     /**
-     * 
+     * 角色id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 
+     * 角色名称
      */
-    @TableField(value = "role_id")
-    private Long roleId;
+    @TableField(value = "role_name")
+    private String roleName;
 
     /**
-     * 
+     * 角色编码
      */
-    @TableField(value = "menu_id")
-    private Long menuId;
+    @TableField(value = "role_code")
+    private String roleCode;
+
+    /**
+     * 描述
+     */
+    @TableField(value = "description")
+    private String description;
 
     /**
      * 创建时间
@@ -65,10 +71,11 @@ public class SysRoleMenu implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        SysRoleMenu other = (SysRoleMenu) that;
+        SysRole other = (SysRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getMenuId() == null ? other.getMenuId() == null : this.getMenuId().equals(other.getMenuId()))
+            && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
+            && (this.getRoleCode() == null ? other.getRoleCode() == null : this.getRoleCode().equals(other.getRoleCode()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -79,8 +86,9 @@ public class SysRoleMenu implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
-        result = prime * result + ((getMenuId() == null) ? 0 : getMenuId().hashCode());
+        result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
+        result = prime * result + ((getRoleCode() == null) ? 0 : getRoleCode().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -94,8 +102,9 @@ public class SysRoleMenu implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", menuId=").append(menuId);
+        sb.append(", roleName=").append(roleName);
+        sb.append(", roleCode=").append(roleCode);
+        sb.append(", description=").append(description);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);

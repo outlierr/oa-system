@@ -2,7 +2,7 @@ package com.example.oa.service.auth.impl;
 
 import com.example.oa.common.enums.MenuType;
 import com.example.oa.common.enums.UserStatus;
-import com.example.oa.entity.system.SysUser;
+import com.example.oa.entity.auth.SysUser;
 import com.example.oa.exception.ServiceException;
 import com.example.oa.security.custom.LoginUser;
 import com.example.oa.service.auth.SysMenuService;
@@ -36,10 +36,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
             throw new ServiceException("该用户已停用");
 
         }
-        Set<SimpleGrantedAuthority> authorities = menuService.getPermsByUserId(user.getId())
+        Set<SimpleGrantedAuthority> authorities = menuService.getMenuPermsByUserId(user.getId())
                 .stream()
-                .filter(v -> Objects.equals(v.getType(), MenuType.BUTTON.getCode()))
-                .map(v -> new SimpleGrantedAuthority(v.getPerms()))
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
 
         return new LoginUser(user, authorities);

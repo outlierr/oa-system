@@ -1,6 +1,6 @@
 package com.example.oa.service.auth;
 
-import com.example.oa.entity.system.SysRoleMenu;
+import com.example.oa.entity.auth.SysRoleMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

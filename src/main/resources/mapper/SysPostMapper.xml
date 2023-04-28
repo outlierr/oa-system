@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.oa.mapper.SysPostMapper">
 
-    <resultMap id="BaseResultMap" type="com.example.oa.entity.system.SysPost">
+    <resultMap id="BaseResultMap" type="com.example.oa.entity.auth.SysPost">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="postCode" column="post_code" jdbcType="VARCHAR"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>

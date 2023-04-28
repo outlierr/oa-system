@@ -1,4 +1,4 @@
-package com.example.oa.entity.system;
+package com.example.oa.entity.auth;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,44 +9,56 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 角色
- * @TableName sys_role
+ * 系统访问记录
+ * @TableName sys_login_log
  */
-@TableName(value ="sys_role")
+@TableName(value ="sys_login_log")
 @Data
-public class SysRole implements Serializable {
+public class SysLoginLog implements Serializable {
     /**
-     * 角色id
+     * 访问ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 角色名称
+     * 用户账号
      */
-    @TableField(value = "role_name")
-    private String roleName;
+    @TableField(value = "username")
+    private String username;
 
     /**
-     * 角色编码
+     * 登录IP地址
      */
-    @TableField(value = "role_code")
-    private String roleCode;
+    @TableField(value = "ipaddr")
+    private String ipaddr;
 
     /**
-     * 描述
+     * 登录状态（0成功 1失败）
      */
-    @TableField(value = "description")
-    private String description;
+    @TableField(value = "status")
+    private Integer status;
 
     /**
-     * 创建时间
+     * 提示信息
+     */
+    @TableField(value = "msg")
+    private String msg;
+
+    /**
+     * 访问时间
+     */
+    @TableField(value = "access_time")
+    private LocalDateTime accessTime;
+
+    /**
+     * 
      */
     @TableField(value = "create_time")
     private LocalDateTime createTime;
 
     /**
-     * 更新时间
+     * 
      */
     @TableField(value = "update_time")
     private LocalDateTime updateTime;
@@ -71,11 +83,13 @@ public class SysRole implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        SysRole other = (SysRole) that;
+        SysLoginLog other = (SysLoginLog) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
-            && (this.getRoleCode() == null ? other.getRoleCode() == null : this.getRoleCode().equals(other.getRoleCode()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+            && (this.getIpaddr() == null ? other.getIpaddr() == null : this.getIpaddr().equals(other.getIpaddr()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getMsg() == null ? other.getMsg() == null : this.getMsg().equals(other.getMsg()))
+            && (this.getAccessTime() == null ? other.getAccessTime() == null : this.getAccessTime().equals(other.getAccessTime()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()));
@@ -86,9 +100,11 @@ public class SysRole implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getRoleName() == null) ? 0 : getRoleName().hashCode());
-        result = prime * result + ((getRoleCode() == null) ? 0 : getRoleCode().hashCode());
-        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
+        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
+        result = prime * result + ((getIpaddr() == null) ? 0 : getIpaddr().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getMsg() == null) ? 0 : getMsg().hashCode());
+        result = prime * result + ((getAccessTime() == null) ? 0 : getAccessTime().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
@@ -102,9 +118,11 @@ public class SysRole implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", roleName=").append(roleName);
-        sb.append(", roleCode=").append(roleCode);
-        sb.append(", description=").append(description);
+        sb.append(", username=").append(username);
+        sb.append(", ipaddr=").append(ipaddr);
+        sb.append(", status=").append(status);
+        sb.append(", msg=").append(msg);
+        sb.append(", accessTime=").append(accessTime);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);
