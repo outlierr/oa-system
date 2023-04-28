@@ -12,6 +12,11 @@ public class ServiceException extends RuntimeException{
 
     private String message;
 
+    public ServiceException(String message) {
+        super(message);
+        this.message = message;
+    }
+
     /**
      * 通过状态码和错误消息创建异常对象
      * @param code

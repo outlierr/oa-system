@@ -1,6 +1,7 @@
 package com.example.oa.common.result;
 
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 /**
  * 统一返回结果
@@ -9,6 +10,7 @@ import lombok.Data;
  */
 @Data
 public class Result<T> {
+    private final Integer SUCCESS = HttpStatus.OK.value();
 
     /**
      * 状态码
@@ -76,7 +78,7 @@ public class Result<T> {
      */
     public static<T> Result<T> fail(T data){
         Result<T> result = build(data);
-        return build(data, ResultCodeEnum.FAIL);
+        return build(data, ResultCodeEnum.ERROR);
     }
 
     public Result<T> message(String msg){

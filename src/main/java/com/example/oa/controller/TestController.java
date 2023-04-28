@@ -1,8 +1,6 @@
 package com.example.oa.controller;
 
-import com.example.oa.service.OaProcessService;
-import com.example.oa.service.SysUserService;
-import com.example.oa.service.impl.OaProcessServiceImpl;
+import com.example.oa.service.auth.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +17,6 @@ public class TestController {
     @GetMapping("/test")
     public Object test() {
         System.out.println(authenticationManager);
-        return "";
+        return "214214";
     }
 }
